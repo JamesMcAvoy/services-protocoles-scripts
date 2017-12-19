@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dns="127.0.0.1"
-csv="/home/csvhtml2.csv"
+csv="/home/scripts/csvhtml2.csv"
 
 #ping
 pingdata=$(ping -c 1 $dns | grep "64 bytes")
