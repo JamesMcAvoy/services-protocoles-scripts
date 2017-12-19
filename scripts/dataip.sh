@@ -1,6 +1,6 @@
 #!/bin/bash
 filelogs="/var/log/apache2/access.log"
-csv="/home/scripts/csvhtml.csv"
+csv="/var/www/csvhtml.csv"
 
 #crontab running every hour this script
 #0 * * * * /home/dataip.sh > /dev/null 2>&1
