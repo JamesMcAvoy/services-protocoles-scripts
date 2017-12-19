@@ -1,7 +1,7 @@
 #!/bin/bash
 #*/5 * * * * /home/scripts/infos.sh
 
-dns="google.com"
+dns="carnofluxe.com"
 csv="/home/scripts/csvhtml2.csv"
 
 #delete last data
