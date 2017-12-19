@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo apt-get install python-setuptools
 git clone https://github.com/dbohdan/csv2html.git
 
