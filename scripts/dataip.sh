@@ -12,6 +12,6 @@ echo -n "" > $csv
 grep "$(date -d -1hour +'%Y:%H')" $filelogs | grep -oE "^((25[0-9]|2[0-4][0-9]|0|1?[0-9][0-9]?)\.){3}(25[0-9]|2[0-4][0-9]|0|1?[0-9][0-9]?)" | sort -u | while read line
 do
 	#wget the infos of the ip
-	wget "http://ip-api.com/csv/$line" >> $csv
+	echo -n $(wget "http://ip-api.com/csv/$line") >> $csv
 	echo $'\n' >> $csv
 done
