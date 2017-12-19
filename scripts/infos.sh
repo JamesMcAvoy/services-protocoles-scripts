@@ -1,7 +1,15 @@
 #!/bin/bash
+#*/5 * * * * /home/scripts/infos.sh
 
-dns="127.0.0.1"
+dns="google.com"
 csv="/home/scripts/csvhtml2.csv"
+
+#delete last data
+echo -n "" > $csv
+
+#date
+echo -n $(date +"Infos de %H:%M:%S") >> $csv
+echo -n "," >> $csv
 
 #ping
 pingdata=$(ping -c 1 $dns | grep "64 bytes")
@@ -13,14 +21,24 @@ else
 fi
 
 pingdata=$pingdata","
-echo $pingdata >> $csv
+echo -n $pingdata >> $csv
 
-#dig
-digdata=$(dig $dns | grep 'IN' | while read line
+echo -n "Infos nslookup :," >> $csv
+
+#nslookup
+nslookup $dns | while read line
 do
-    echo $(cat $1) >> $csv
-done)
+	echo -n $line >> $csv
+	echo -n "," >> $csv
+done
 
-echo "," >> $csv
+#HTTP
+echo -n "Temps réponse HTTP :," >> $csv
+{ time wget $dns -q --output-document=/dev/null; } 2> "_tmptime"
+echo -n $(grep real "_tmptime") >> $csv
 
-#time wget
+rm "_tmptime"
+echo ",Fin" >> $csv
+
+#SSH
+scp -p $csv root@192.168.253.129:/var/www
